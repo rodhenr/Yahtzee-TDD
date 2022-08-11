@@ -1,0 +1,74 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.title {
+  color: #fff;
+  font-family: "Life Savers", cursive;
+  font-size: 3rem;
+  font-weight: 400;
+  margin: 1rem 0;
+}
+
+.dices {
+  background-color: #eb1d36;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.die {
+  display: flex;
+  padding: 0.5rem 0.7rem;
+
+  svg {
+    color: #fff;
+    cursor: pointer;
+    font-size: 5rem;
+  }
+}
+
+.die.disabled {
+  svg {
+    color: #cccccc;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
+}
+
+.remaining {
+  background-color: #eb1d36;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+
+  p {
+    color: #fff;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.roll,
+.newRound {
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  width: 60px;
+}
+
+.roll {
+  background-color: #eb1d36;
+}
+
+.newRound {
+  background-color: #f37878;
+}

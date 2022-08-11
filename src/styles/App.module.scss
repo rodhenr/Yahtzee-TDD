@@ -1,0 +1,9 @@
+.container {
+  background-color: #EDAFAF;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 0.2fr 0.7fr 0.1fr;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 600px;
+}
