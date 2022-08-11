@@ -21,7 +21,9 @@
 }
 
 .die {
+  align-items: center;
   display: flex;
+  flex-direction: column;
   padding: 0.5rem 0.7rem;
 
   svg {
@@ -29,11 +31,27 @@
     cursor: pointer;
     font-size: 5rem;
   }
+
+  p {
+    color: #fff;
+    font-size: 0.75rem;
+    margin: 0;
+  }
 }
 
 .die.disabled {
-  svg {
+  svg,
+  p {
     color: #cccccc;
+  }
+}
+
+.die.enabled {
+  &:hover {
+    svg,
+    p {
+      color: rgb(243, 225, 225);
+    }
   }
 }
 
@@ -57,18 +75,19 @@
 
 .roll,
 .newRound {
+  background-color: #eb1d36;
   border: none;
   border-radius: 10px;
   color: #fff;
   cursor: pointer;
   font-size: 0.8rem;
   width: 60px;
+
+  &:hover {
+    background-color: #d5182e;
+  }
 }
 
-.roll {
-  background-color: #eb1d36;
-}
-
-.newRound {
+.newRound.roundDisabled {
   background-color: #f37878;
 }

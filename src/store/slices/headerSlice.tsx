@@ -1,9 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+const newDices = () => {
+  const dicesArray = [];
+  for (let i = 0; i < 5; i++) {
+    dicesArray.push(Math.ceil(Math.random() * 6));
+  }
+
+  return dicesArray;
+};
+
 const initialState = {
   newRound: false,
   remainingMoves: 2,
-  dices: [1, 2, 3, 4, 5],
+  dices: newDices(),
   dicesFreeze: [false, false, false, false, false, false],
 };
 
@@ -20,7 +29,7 @@ const headerSlice = createSlice({
 
         for (let i = 0; i < 5; i++) {
           if (state.dicesFreeze[i] === false) {
-            dicesArray.push(Math.ceil(Math.random() * 5));
+            dicesArray.push(Math.ceil(Math.random() * 6));
           } else {
             dicesArray.push(state.dices[i]);
           }

@@ -66,6 +66,7 @@ function Header() {
               }}
             >
               {handleDie(i)}
+              <p>{i}</p>
             </div>
           );
         })}
@@ -74,8 +75,16 @@ function Header() {
         <div data-testid="remaining" className={styles.remaining}>
           <p>{remainingMoves} MOVIMENTO(S) RESTANTE(S)</p>
         </div>
-        {newRound ? (
-          <button type="button" className={styles.newRound}>
+        {remainingMoves === 0 ? (
+          <button
+            data-testid="newRound"
+            type="button"
+            className={
+              newRound
+                ? styles.newRound
+                : `${styles.newRound} ${styles.roundDisabled}`
+            }
+          >
             JOGAR
           </button>
         ) : (

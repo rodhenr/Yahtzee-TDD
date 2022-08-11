@@ -27,12 +27,6 @@ describe("Dices", () => {
     });
   });
 
-  test("button should be 'ROLL' in first render", () => {
-    renderWithProviders(<Header />);
-    const button = screen.getByRole("button");
-    expect(button).toHaveTextContent("ROLL");
-  });
-
   test("should be possible to 'freeze' a die", () => {
     renderWithProviders(<Header />);
     const dices = screen.getAllByTestId("die");
@@ -41,16 +35,29 @@ describe("Dices", () => {
   });
 });
 
-describe("Remaining Moves", () => {
-  test("should render with 2 remaining moves", () => {
+describe("Rolling", () => {
+  test("should display '2 MOVIMENTO(S) RESTANTE(S)' on first render", () => {
     renderWithProviders(<Header />);
     const remaining = screen.getByTestId("remaining");
     expect(remaining).toBeInTheDocument();
     expect(remaining).toHaveTextContent("2 MOVIMENTO(S) RESTANTE(S)");
   });
-});
 
-describe.only("Rolling", () => {
+  test("should display '1 MOVIMENTO(S) RESTANTE(S)' after one roll", () => {
+    renderWithProviders(<Header />);
+    const remaining = screen.getByTestId("remaining");
+    const roll = screen.getByTestId("rollDices");
+    fireEvent.click(roll);
+    expect(remaining).toBeInTheDocument();
+    expect(remaining).toHaveTextContent("1 MOVIMENTO(S) RESTANTE(S)");
+  });
+
+  test("button should be 'ROLL' in first render", () => {
+    renderWithProviders(<Header />);
+    const button = screen.getByRole("button");
+    expect(button).toHaveTextContent("ROLL");
+  });
+
   test("should be possible roll for new dices", () => {
     const values = ["1", "2", "3", "4", "5", "6"];
     renderWithProviders(<Header />);
@@ -76,5 +83,15 @@ describe.only("Rolling", () => {
     expect(dices[2]).toHaveClass("enabled");
     expect(dices[3]).toHaveClass("enabled");
     expect(dices[4]).toHaveClass("enabled");
+  });
+
+  test("should display 'PLAY' instead of 'ROLL' after 2 rolls", () => {
+    renderWithProviders(<Header />);
+    const remaining = screen.getByTestId("remaining");
+    const roll = screen.getByTestId("rollDices");
+    fireEvent.click(roll);
+    fireEvent.click(roll);
+    expect(remaining).toHaveTextContent("0 MOVIMENTO(S) RESTANTE(S)");
+    expect(roll).toHaveTextContent("JOGAR");
   });
 });
