@@ -1,8 +1,19 @@
-import { useState } from "react";
+import {
+  newDices,
+  setRemainingMoves,
+  startNewRound,
+} from "../../store/slices/headerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 function Header() {
-  const [newGame, setNewGame] = useState(false);
-  const dices = [1, 2, 3, 4, 5];
+  const dispatch = useDispatch();
+
+  const dices = useSelector((state: RootState) => state.header.dices);
+  const newRound = useSelector((state: RootState) => state.header.newRound);
+  const remainingMoves = useSelector(
+    (state: RootState) => state.header.remainingMoves
+  );
 
   return (
     <div>
@@ -16,7 +27,14 @@ function Header() {
           );
         })}
       </div>
-      {newGame ? <button>PLAY</button> : <button>ROLL</button>}
+      {newRound ? (
+        <button>JOGAR</button>
+      ) : (
+        <button data-testid="rollDices">ROLL</button>
+      )}
+      <div data-testid="remaining">
+        <p>{remainingMoves} Movimento(s) restante(s)</p>
+      </div>
     </div>
   );
 }
