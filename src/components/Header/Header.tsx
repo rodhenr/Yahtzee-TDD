@@ -1,7 +1,6 @@
 import {
   freezeDie,
   rollDices,
-  startNewRound,
 } from "../../store/slices/headerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";

@@ -48,6 +48,8 @@
 
 .die.enabled {
   &:hover {
+    transform: scale(1.1);
+
     svg,
     p {
       color: rgb(243, 225, 225);

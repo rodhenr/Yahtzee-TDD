@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto Condensed", sans-serif;
+  margin-top: 2rem;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: 0.25fr 0.65fr 0.1fr;
+  gap: 0.2rem;
+  padding: 0.3rem 0.5rem;
+
+  &:hover {
+    transform: scale(1.01);
+    
+    p {
+      background-color: #d5182e;
+    }
+  }
+
+  p {
+    background-color: #eb1d36;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 0.7rem 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.option.disabled {
+  &:hover {
+    transform: scale(1);
+
+    p {
+      background-color: #f37878;
+    }
+  }
+
+  p {
+    background-color: #f37878;
+  }
+}
