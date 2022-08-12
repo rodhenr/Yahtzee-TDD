@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { startNewRound } from "../../store/slices/headerSlice";
 import { tryToScore } from "../../store/slices/optionsSlice";
 import { RootState } from "../../store/store";
 
@@ -7,6 +8,12 @@ import styles from "../../styles/Options.module.scss";
 function Options() {
   const dispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options.types);
+  const dices = useSelector((state: RootState) => state.header.dices);
+
+  const handleScore = (opt: string) => {
+    dispatch(tryToScore({ opt, dices }));
+    dispatch(startNewRound());
+  };
 
   return (
     <div className={styles.container}>
@@ -20,7 +27,7 @@ function Options() {
                 : styles.option
             }
             onClick={() => {
-              dispatch(tryToScore());
+              handleScore(i.class);
             }}
             key={index}
           >

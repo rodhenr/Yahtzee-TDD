@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { singlePoints } from "../../helpers/rules";
 
 interface Score {
   class: string;
@@ -6,6 +7,7 @@ interface Score {
   name: string;
   score: number;
   scoreClass: string;
+  rule: number;
 }
 
 interface State {
@@ -20,6 +22,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointOne",
       class: "one",
+      rule: 1,
     },
     {
       name: "DOIS",
@@ -27,6 +30,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointTwo",
       class: "two",
+      rule: 2,
     },
     {
       name: "TRÊS",
@@ -34,6 +38,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointThree",
       class: "three",
+      rule: 3,
     },
     {
       name: "QUATRO",
@@ -41,6 +46,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFour",
       class: "four",
+      rule: 4,
     },
     {
       name: "CINCO",
@@ -48,6 +54,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFive",
       class: "five",
+      rule: 5,
     },
     {
       name: "SEIS",
@@ -55,6 +62,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointSix",
       class: "six",
+      rule: 6,
     },
     {
       name: "3 DE UM TIPO",
@@ -62,6 +70,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointThreeKind",
       class: "threeKind",
+      rule: 1,
     },
     {
       name: "4 DE UM TIPO",
@@ -69,6 +78,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFourKind",
       class: "fourKind",
+      rule: 1,
     },
     {
       name: "YAHTZEE",
@@ -76,6 +86,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointYahtzee",
       class: "yahtzee",
+      rule: 1,
     },
     {
       name: "4 SEGUIDOS",
@@ -83,6 +94,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFourRow",
       class: "fourRow",
+      rule: 1,
     },
     {
       name: "5 SEGUIDOS",
@@ -90,6 +102,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFiveRow",
       class: "fiveRow",
+      rule: 1,
     },
     {
       name: "SOMA",
@@ -97,6 +110,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointSum",
       class: "sum",
+      rule: 1,
     },
   ],
 };
@@ -105,15 +119,20 @@ const optionsSlice = createSlice({
   name: "options",
   initialState,
   reducers: {
-    tryToScore: (state) => {
+    tryToScore: (
+      state,
+      action: PayloadAction<{ opt: string; dices: number[] }>
+    ) => {
+      const { opt, dices } = action.payload;
+
       const newState = state.types.map((i) => {
-        if (i.class === "one") {
-          return { ...i, score: 5 };
+        if (i.class === opt) {
+          return { ...i, score: singlePoints(dices, i.rule) };
         } else {
           return i;
         }
       });
-      
+
       state.types = newState;
     },
   },

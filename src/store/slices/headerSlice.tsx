@@ -20,8 +20,8 @@ const headerSlice = createSlice({
   name: "header",
   initialState,
   reducers: {
-    startNewRound: (state) => {
-      state.newRound = true;
+    freezeDie: (state, action: PayloadAction<number>) => {
+      state.dicesFreeze[action.payload] = !state.dicesFreeze[action.payload];
     },
     rollDices: (state) => {
       if (state.remainingMoves > 0) {
@@ -39,8 +39,10 @@ const headerSlice = createSlice({
         state.remainingMoves -= 1;
       }
     },
-    freezeDie: (state, action: PayloadAction<number>) => {
-      state.dicesFreeze[action.payload] = !state.dicesFreeze[action.payload];
+    startNewRound: (state) => {
+      state.newRound = true;
+      state.remainingMoves = 0;
+      state.dices = newDices();
     },
   },
 });
