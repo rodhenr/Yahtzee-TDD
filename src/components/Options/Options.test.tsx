@@ -36,7 +36,6 @@ describe.only("Score", () => {
     renderWithProviders(<TestApp />, {
       preloadedState: {
         header: {
-          newRound: false,
           remainingMoves: 2,
           dicesFreeze: [false, false, false, false, false],
           dices: [1, 1, 1, 1, 1],

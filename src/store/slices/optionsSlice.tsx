@@ -140,7 +140,6 @@ const optionsSlice = createSlice({
 
       const newState = state.types.map((i) => {
         if (i.class === opt && i.scored === false) {
-          console.log("aqui")
           return { ...i, score: singlePoints(dices, i.rule), scored: true };
         } else {
           return i;

@@ -21,7 +21,6 @@ function Header() {
   const dicesFreeze = useSelector(
     (state: RootState) => state.header.dicesFreeze
   );
-  const newRound = useSelector((state: RootState) => state.header.newRound);
   const remainingMoves = useSelector(
     (state: RootState) => state.header.remainingMoves
   );
@@ -52,7 +51,7 @@ function Header() {
             <div
               data-testid="die"
               key={index}
-              className={
+              className={ // necessário retirar o freeze após novos dados
                 dicesFreeze[index]
                   ? `${styles.die} ${styles.disabled}`
                   : `${styles.die} ${styles.enabled}`

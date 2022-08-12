@@ -10,7 +10,6 @@ const newDices = () => {
 };
 
 const initialState = {
-  newRound: false,
   remainingMoves: 2,
   dices: newDices(),
   dicesFreeze: [false, false, false, false, false, false],
@@ -40,7 +39,6 @@ const headerSlice = createSlice({
       }
     },
     startNewRound: (state) => {
-      state.newRound = true;
       state.remainingMoves = 2;
       state.dices = newDices();
     },
