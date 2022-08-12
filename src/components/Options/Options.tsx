@@ -10,7 +10,9 @@ function Options() {
   const options = useSelector((state: RootState) => state.options.types);
   const dices = useSelector((state: RootState) => state.header.dices);
 
-  const handleScore = (opt: string) => {
+  const handleScore = (opt: string, scored: boolean) => {
+    if (scored) return;
+    
     dispatch(tryToScore({ opt, dices }));
     dispatch(startNewRound());
   };
@@ -22,12 +24,10 @@ function Options() {
           <div
             data-testid={i.class}
             className={
-              i.score > 0
-                ? `${styles.option} ${styles.disabled}`
-                : styles.option
+              i.scored ? `${styles.option} ${styles.disabled}` : styles.option
             }
             onClick={() => {
-              handleScore(i.class);
+              handleScore(i.class, i.scored);
             }}
             key={index}
           >

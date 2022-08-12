@@ -8,6 +8,7 @@ interface Score {
   score: number;
   scoreClass: string;
   rule: number;
+  scored: boolean;
 }
 
 interface State {
@@ -23,6 +24,7 @@ const initialState: State = {
       scoreClass: "pointOne",
       class: "one",
       rule: 1,
+      scored: false,
     },
     {
       name: "DOIS",
@@ -31,6 +33,7 @@ const initialState: State = {
       scoreClass: "pointTwo",
       class: "two",
       rule: 2,
+      scored: false,
     },
     {
       name: "TRÊS",
@@ -39,6 +42,7 @@ const initialState: State = {
       scoreClass: "pointThree",
       class: "three",
       rule: 3,
+      scored: false,
     },
     {
       name: "QUATRO",
@@ -47,6 +51,7 @@ const initialState: State = {
       scoreClass: "pointFour",
       class: "four",
       rule: 4,
+      scored: false,
     },
     {
       name: "CINCO",
@@ -55,6 +60,7 @@ const initialState: State = {
       scoreClass: "pointFive",
       class: "five",
       rule: 5,
+      scored: false,
     },
     {
       name: "SEIS",
@@ -63,6 +69,7 @@ const initialState: State = {
       scoreClass: "pointSix",
       class: "six",
       rule: 6,
+      scored: false,
     },
     {
       name: "3 DE UM TIPO",
@@ -71,6 +78,7 @@ const initialState: State = {
       scoreClass: "pointThreeKind",
       class: "threeKind",
       rule: 1,
+      scored: false,
     },
     {
       name: "4 DE UM TIPO",
@@ -79,6 +87,7 @@ const initialState: State = {
       scoreClass: "pointFourKind",
       class: "fourKind",
       rule: 1,
+      scored: false,
     },
     {
       name: "YAHTZEE",
@@ -87,6 +96,7 @@ const initialState: State = {
       scoreClass: "pointYahtzee",
       class: "yahtzee",
       rule: 1,
+      scored: false,
     },
     {
       name: "4 SEGUIDOS",
@@ -95,6 +105,7 @@ const initialState: State = {
       scoreClass: "pointFourRow",
       class: "fourRow",
       rule: 1,
+      scored: false,
     },
     {
       name: "5 SEGUIDOS",
@@ -103,6 +114,7 @@ const initialState: State = {
       scoreClass: "pointFiveRow",
       class: "fiveRow",
       rule: 1,
+      scored: false,
     },
     {
       name: "SOMA",
@@ -111,6 +123,7 @@ const initialState: State = {
       scoreClass: "pointSum",
       class: "sum",
       rule: 1,
+      scored: false,
     },
   ],
 };
@@ -126,8 +139,9 @@ const optionsSlice = createSlice({
       const { opt, dices } = action.payload;
 
       const newState = state.types.map((i) => {
-        if (i.class === opt) {
-          return { ...i, score: singlePoints(dices, i.rule) };
+        if (i.class === opt && i.scored === false) {
+          console.log("aqui")
+          return { ...i, score: singlePoints(dices, i.rule), scored: true };
         } else {
           return i;
         }

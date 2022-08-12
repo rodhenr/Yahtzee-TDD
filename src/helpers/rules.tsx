@@ -4,6 +4,6 @@ export const singlePoints = (dices: number[], rule: number) => {
   dices.forEach((i) => {
     if (i === rule) score += rule;
   });
-
+  console.log("somando...", score);
   return score;
 };

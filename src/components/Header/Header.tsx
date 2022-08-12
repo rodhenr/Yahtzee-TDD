@@ -1,7 +1,4 @@
-import {
-  freezeDie,
-  rollDices,
-} from "../../store/slices/headerSlice";
+import { freezeDie, rollDices } from "../../store/slices/headerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
@@ -78,11 +75,7 @@ function Header() {
           <button
             data-testid="newRound"
             type="button"
-            className={
-              newRound
-                ? styles.newRound
-                : `${styles.newRound} ${styles.roundDisabled}`
-            }
+            className={styles.newRound}
           >
             JOGAR
           </button>
