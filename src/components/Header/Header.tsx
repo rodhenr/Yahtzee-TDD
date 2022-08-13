@@ -51,7 +51,8 @@ function Header() {
             <div
               data-testid="die"
               key={index}
-              className={ // necessário retirar o freeze após novos dados
+              className={
+                // necessário retirar o freeze após novos dados
                 dicesFreeze[index]
                   ? `${styles.die} ${styles.disabled}`
                   : `${styles.die} ${styles.enabled}`
@@ -70,26 +71,16 @@ function Header() {
         <div data-testid="remaining" className={styles.remaining}>
           <p>{remainingMoves} MOVIMENTO(S) RESTANTE(S)</p>
         </div>
-        {remainingMoves === 0 ? (
-          <button
-            data-testid="newRound"
-            type="button"
-            className={styles.newRound}
-          >
-            JOGAR
-          </button>
-        ) : (
-          <button
-            data-testid="rollDices"
-            className={styles.roll}
-            onClick={() => {
-              dispatch(rollDices());
-            }}
-            type="button"
-          >
-            ROLL
-          </button>
-        )}
+        <button
+          data-testid="rollDices"
+          className={styles.roll}
+          onClick={() => {
+            dispatch(rollDices());
+          }}
+          type="button"
+        >
+          ROLL
+        </button>
       </div>
     </div>
   );

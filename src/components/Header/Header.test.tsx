@@ -52,12 +52,6 @@ describe("Rolling", () => {
     expect(remaining).toHaveTextContent("1 MOVIMENTO(S) RESTANTE(S)");
   });
 
-  test("button should be 'ROLL' in first render", () => {
-    renderWithProviders(<Header />);
-    const button = screen.getByRole("button");
-    expect(button).toHaveTextContent("ROLL");
-  });
-
   test("should be possible roll for new dices", () => {
     const values = ["1", "2", "3", "4", "5", "6"];
     renderWithProviders(<Header />);
@@ -83,15 +77,5 @@ describe("Rolling", () => {
     expect(dices[2]).toHaveClass("enabled");
     expect(dices[3]).toHaveClass("enabled");
     expect(dices[4]).toHaveClass("enabled");
-  });
-
-  test("should display 'PLAY' instead of 'ROLL' after 2 rolls", () => {
-    renderWithProviders(<Header />);
-    const remaining = screen.getByTestId("remaining");
-    const roll = screen.getByTestId("rollDices");
-    fireEvent.click(roll);
-    fireEvent.click(roll);
-    expect(remaining).toHaveTextContent("0 MOVIMENTO(S) RESTANTE(S)");
-    expect(roll).toHaveTextContent("JOGAR");
   });
 });

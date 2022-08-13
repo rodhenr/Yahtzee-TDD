@@ -41,6 +41,7 @@ const headerSlice = createSlice({
     startNewRound: (state) => {
       state.remainingMoves = 2;
       state.dices = newDices();
+      state.dicesFreeze = [false, false, false, false, false];
     },
   },
 });

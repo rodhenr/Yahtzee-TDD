@@ -11,7 +11,7 @@ const TestApp = () => (
   </>
 );
 
-describe.only("Score", () => {
+describe("Score", () => {
   test("should be able to score and disable the item scored", () => {
     renderWithProviders(<Options />);
     const scoreOption = screen.getByTestId("one");
@@ -21,18 +21,19 @@ describe.only("Score", () => {
     expect(score).toBeInTheDocument();
   });
 
-  test("should display '0 MOVIMENTO(S) RESTANTE(S)' and 'PLAY' after choose a score option", () => {
+  test("should reset remaining moves after choose a score option", () => {
     renderWithProviders(<TestApp />);
     const scoreOption = screen.getByTestId("one");
-    fireEvent.click(scoreOption);
+    const roll = screen.getByTestId("rollDices");
     const remaining = screen.getByTestId("remaining");
-    const play = screen.getByTestId("newRound");
-    expect(remaining).toHaveTextContent("0 MOVIMENTO(S) RESTANTE(S)");
-    expect(play).toBeInTheDocument();
-    expect(play).toHaveTextContent("JOGAR");
+    expect(remaining).toHaveTextContent("2 MOVIMENTO(S) RESTANTE(S)");
+    fireEvent.click(roll);
+    expect(remaining).toHaveTextContent("1 MOVIMENTO(S) RESTANTE(S)");
+    fireEvent.click(scoreOption);
+    expect(remaining).toHaveTextContent("2 MOVIMENTO(S) RESTANTE(S)");
   });
 
-  test.only("should score 5 points after choose '1 PONTO POR CADA 1' with 5 dices 1", () => {
+  test("should score 5 points after choose '1 PONTO POR CADA 1' with 5 dices 1", () => {
     renderWithProviders(<TestApp />, {
       preloadedState: {
         header: {
