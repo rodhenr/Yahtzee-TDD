@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { singlePoints } from "../../helpers/rules";
+import { inARow, sameDices, singlePoints } from "../../helpers/rules";
 
 interface Score {
   class: string;
@@ -77,7 +77,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointThreeKind",
       class: "threeKind",
-      rule: 1,
+      rule: 3,
       scored: false,
     },
     {
@@ -86,7 +86,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFourKind",
       class: "fourKind",
-      rule: 1,
+      rule: 4,
       scored: false,
     },
     {
@@ -95,7 +95,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointYahtzee",
       class: "yahtzee",
-      rule: 1,
+      rule: 5,
       scored: false,
     },
     {
@@ -104,7 +104,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFourRow",
       class: "fourRow",
-      rule: 1,
+      rule: 4,
       scored: false,
     },
     {
@@ -113,7 +113,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointFiveRow",
       class: "fiveRow",
-      rule: 1,
+      rule: 5,
       scored: false,
     },
     {
@@ -139,8 +139,29 @@ const optionsSlice = createSlice({
       const { opt, dices } = action.payload;
 
       const newState = state.types.map((i) => {
-        if (i.class === opt && i.scored === false) {
-          return { ...i, score: singlePoints(dices, i.rule), scored: true };
+        if (i.scored === true) {
+          return i;
+        } else if (i.class === opt) {
+          if (
+            opt === "one" ||
+            opt === "two" ||
+            opt === "three" ||
+            opt === "four" ||
+            opt === "five" ||
+            opt === "six"
+          ) {
+            return { ...i, score: singlePoints(dices, i.rule), scored: true };
+          } else if (
+            opt === "threeKind" ||
+            opt === "fourKind" ||
+            opt === "yahtzee"
+          ) {
+            return { ...i, score: sameDices(dices, i.rule), scored: true };
+          } else if (opt === "fourRow" || opt === "fiveRow") {
+            return { ...i, score: inARow(dices, i.rule), scored: true };
+          } else {
+            return { ...i, scored: true };
+          }
         } else {
           return i;
         }
