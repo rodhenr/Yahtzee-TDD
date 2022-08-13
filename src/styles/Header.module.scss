@@ -1,14 +1,17 @@
 .container {
   align-items: center;
+  background-color: #edafaf;
+  border-radius: 10px 10px 0 0;
   display: flex;
   flex-direction: column;
   font-family: "Roboto Condensed", sans-serif;
+  padding-bottom: 1rem;
 }
 
 .title {
   color: #fff;
   font-family: "Life Savers", cursive;
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-weight: 400;
   margin: 1rem 0;
 }
@@ -29,7 +32,7 @@
   svg {
     color: #fff;
     cursor: pointer;
-    font-size: 5rem;
+    font-size: 4.5rem;
   }
 
   p {

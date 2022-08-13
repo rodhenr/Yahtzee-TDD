@@ -12,7 +12,7 @@ function Options() {
 
   const handleScore = (opt: string, scored: boolean) => {
     if (scored) return;
-    
+
     dispatch(tryToScore({ opt, dices }));
     dispatch(startNewRound());
   };

@@ -13,6 +13,7 @@ interface Score {
 
 interface State {
   types: Score[];
+  totalScore: number;
 }
 
 const initialState: State = {
@@ -126,6 +127,7 @@ const initialState: State = {
       scored: false,
     },
   ],
+  totalScore: 0,
 };
 
 const optionsSlice = createSlice({
@@ -150,16 +152,20 @@ const optionsSlice = createSlice({
             opt === "five" ||
             opt === "six"
           ) {
+            state.totalScore += singlePoints(dices, i.rule);
             return { ...i, score: singlePoints(dices, i.rule), scored: true };
           } else if (
             opt === "threeKind" ||
             opt === "fourKind" ||
             opt === "yahtzee"
           ) {
+            state.totalScore += sameDices(dices, i.rule);
             return { ...i, score: sameDices(dices, i.rule), scored: true };
           } else if (opt === "fourRow" || opt === "fiveRow") {
+            state.totalScore += inARow(dices, i.rule);
             return { ...i, score: inARow(dices, i.rule), scored: true };
           } else {
+            state.totalScore += sumDices(dices);
             return { ...i, score: sumDices(dices), scored: true };
           }
         } else {

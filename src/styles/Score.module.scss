@@ -1,0 +1,17 @@
+.container {
+  align-items: center;
+  background-color: #edafaf;
+  
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 2rem;
+  gap: 1rem;
+  padding: 2rem 0 0.5rem;
+  justify-content: center;
+
+  p {
+    color: #fff;
+    margin: 0;
+  }
+}

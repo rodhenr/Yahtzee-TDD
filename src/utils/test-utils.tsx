@@ -19,7 +19,10 @@ export function renderWithProviders(
   {
     preloadedState = {},
     store = configureStore({
-      reducer: { header: headerReducer, options: optionsReducer },
+      reducer: {
+        header: headerReducer,
+        options: optionsReducer,
+      },
       preloadedState,
     }),
     ...renderOptions
