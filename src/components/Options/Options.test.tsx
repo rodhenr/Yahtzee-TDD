@@ -12,13 +12,15 @@ const TestApp = () => (
 );
 
 describe("Score", () => {
-  test("should be able to score and disable the item scored", () => {
+  test("should be able to score, disable the item scored and can't score again in that item", () => {
     renderWithProviders(<Options />);
     const scoreOption = screen.getByTestId("one");
     const score = screen.getByTestId("pointOne");
     fireEvent.click(scoreOption);
     expect(scoreOption).toHaveClass("disabled");
     expect(score).toBeInTheDocument();
+    fireEvent.click(scoreOption);
+    expect(scoreOption).toHaveClass("disabled");
   });
 
   test("should reset remaining moves after choose a score option", () => {
@@ -137,5 +139,22 @@ describe("Score", () => {
     fireEvent.click(scoreOption);
     expect(scoreOption).toHaveClass("disabled");
     expect(score).toHaveTextContent("40");
+  });
+
+  test("should be possible to score 30 points after choose 'Soma' with 6 dices 6", () => {
+    renderWithProviders(<TestApp />, {
+      preloadedState: {
+        header: {
+          remainingMoves: 2,
+          dicesFreeze: [false, false, false, false, false],
+          dices: [6, 6, 6, 6, 6],
+        },
+      },
+    });
+    const scoreOption = screen.getByTestId("sum");
+    const score = screen.getByTestId("pointSum");
+    fireEvent.click(scoreOption);
+    expect(scoreOption).toHaveClass("disabled");
+    expect(score).toHaveTextContent("30");
   });
 });

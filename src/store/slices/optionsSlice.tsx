@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { inARow, sameDices, singlePoints } from "../../helpers/rules";
+import { inARow, sameDices, singlePoints, sumDices } from "../../helpers/rules";
 
 interface Score {
   class: string;
@@ -100,7 +100,7 @@ const initialState: State = {
     },
     {
       name: "4 SEGUIDOS",
-      desc: "20 PONTOS",
+      desc: "30 PONTOS",
       score: 0,
       scoreClass: "pointFourRow",
       class: "fourRow",
@@ -109,7 +109,7 @@ const initialState: State = {
     },
     {
       name: "5 SEGUIDOS",
-      desc: "30 PONTOS",
+      desc: "40 PONTOS",
       score: 0,
       scoreClass: "pointFiveRow",
       class: "fiveRow",
@@ -122,7 +122,7 @@ const initialState: State = {
       score: 0,
       scoreClass: "pointSum",
       class: "sum",
-      rule: 1,
+      rule: 0,
       scored: false,
     },
   ],
@@ -139,10 +139,10 @@ const optionsSlice = createSlice({
       const { opt, dices } = action.payload;
 
       const newState = state.types.map((i) => {
-        if (i.scored === true) {
-          return i;
-        } else if (i.class === opt) {
-          if (
+        if (i.class === opt) {
+          if (i.scored === true) {
+            return i;
+          } else if (
             opt === "one" ||
             opt === "two" ||
             opt === "three" ||
@@ -160,7 +160,7 @@ const optionsSlice = createSlice({
           } else if (opt === "fourRow" || opt === "fiveRow") {
             return { ...i, score: inARow(dices, i.rule), scored: true };
           } else {
-            return { ...i, scored: true };
+            return { ...i, score: sumDices(dices), scored: true };
           }
         } else {
           return i;

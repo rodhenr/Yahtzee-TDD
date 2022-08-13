@@ -62,3 +62,13 @@ export const inARow = (dices: number[], rule: number) => {
 
   return score;
 };
+
+export const sumDices = (dices: number[]) => {
+  let score = 0;
+
+  dices.forEach((item) => {
+    score += item;
+  });
+
+  return score;
+};
