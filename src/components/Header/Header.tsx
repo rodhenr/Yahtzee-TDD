@@ -1,6 +1,7 @@
 import { freezeDie, rollDices } from "../../store/slices/headerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { gameEnd } from "../../store/slices/optionsSlice";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,6 +18,7 @@ import styles from "../../styles/Header.module.scss";
 function Header() {
   const dispatch = useDispatch();
 
+  const gameOver = useSelector(gameEnd);
   const dices = useSelector((state: RootState) => state.header.dices);
   const dicesFreeze = useSelector(
     (state: RootState) => state.header.dicesFreeze
@@ -71,16 +73,33 @@ function Header() {
         <div data-testid="remaining" className={styles.remaining}>
           <p>{remainingMoves} MOVIMENTO(S) RESTANTE(S)</p>
         </div>
-        <button
-          data-testid="rollDices"
-          className={styles.roll}
-          onClick={() => {
-            dispatch(rollDices());
-          }}
-          type="button"
-        >
-          ROLL
-        </button>
+        {gameOver ? (
+          <button
+            data-testid="newGame"
+            className={`${styles.roll} ${styles.gameEnd}`}
+            onClick={() => {
+              window.location.reload();
+            }}
+            type="button"
+          >
+            NOVO JOGO
+          </button>
+        ) : (
+          <button
+            data-testid="rollDices"
+            className={
+              remainingMoves === 0
+                ? `${styles.roll} ${styles.noMovesLeft}`
+                : styles.roll
+            }
+            onClick={() => {
+              dispatch(rollDices());
+            }}
+            type="button"
+          >
+            ROLL
+          </button>
+        )}
       </div>
     </div>
   );

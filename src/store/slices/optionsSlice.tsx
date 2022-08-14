@@ -16,6 +16,10 @@ interface State {
   totalScore: number;
 }
 
+interface StateOptions {
+  options: State;
+}
+
 const initialState: State = {
   types: [
     {
@@ -179,4 +183,7 @@ const optionsSlice = createSlice({
 });
 
 export const { tryToScore } = optionsSlice.actions;
+export const gameEnd = (state: StateOptions) => {
+  return state.options.types.every((i) => i.scored === true);
+};
 export default optionsSlice.reducer;
